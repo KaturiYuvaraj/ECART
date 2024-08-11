@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="p-4 m-4">
+        <div class="col-lg-5 mt-5 border mb-5 mx-auto rounded-3 pt-5 bg-dark">
+            <div class="text-center">
+            <h2 class="fw-bold mb-2 text-uppercase text-info">Login</h2>
+            </div><br>
+            <form action="/login/" method="POST">
+                
+                {% csrf_token %}
+
+                {% if error%}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {% endif %}
+                <div class="form-group text-info">
+                    <label for="">Email</label>
+                    <input required type="email" name="email" id=""
+                    value="{{values.email}}" 
+                    class=" form-control form-control" placeholder="enter e-mail">
+                </div>
+                <div class="form-group text-info">
+                    <label for="">Password</label>
+                    <input type="password" 
+                    name="password" 
+                    id="passwordField" 
+                     class="form-control form-control" placeholder="enter password"><small class="float-right py-3 showPasswordToggle">SHOW</small>
+                </div><br>
+                <span> <br> </span>
+                <div class="form-group">
+                    <input class="btn btn-outline-info btn-lg btn-block" type="submit" value="Login">
+                </div><br>
+                <div>
+                    <p class="mb-0 text-center text-info">Don't have an account? <a href="/signup" class="text-info">Sign Up</a>
+                    </p>
+                  </div><br>   
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const passwordField=document.querySelector("#passwordField");
+    const showPasswordToggle=document.querySelector(".showPasswordToggle");
+
+    const handleToggleInput = (e) => {
+        if (showPasswordToggle.textContent === "SHOW") { 
+            showPasswordToggle.textContent = "HIDE"; 
+            passwordField.setAttribute("type", "text");
+        } 
+        else {
+        showPasswordToggle.textContent = "SHOW"; 
+        passwordField.setAttribute("type", "password");
+        }
+        };
+
+        showPasswordToggle.addEventListener("click", handleToggleInput);
+
+
+</script>
+{% endblock %}
+
